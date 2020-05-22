@@ -1,12 +1,31 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import moduleName from '@atlaskit/css-reset'
+import "@atlaskit/css-reset";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/core/styles";
+
+import { createBrowserHistory } from "history";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { ConnectedRouter } from "connected-react-router";
+import createStore from "./store";
 import Routes from "./routes";
+import theme from "./styles/theme";
+const history = createBrowserHistory();
+
+const { store, persistor } = createStore(history);
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ConnectedRouter history={history}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Routes />
+          </ThemeProvider>
+        </ConnectedRouter>
+      </PersistGate>
+    </Provider>
   );
 }
 
