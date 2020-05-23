@@ -1,6 +1,6 @@
 import firebase from "firebase/app";
 import { showSnackbar } from "./snackbar";
-import { setColumnTasks } from "./column";
+import { addTaskToColumn } from "./column";
 
 const saveTask = (params) => {
   return new Promise((resolve, reject) => {
@@ -25,7 +25,7 @@ export const addTaskAction = (params) => async (dispatch, state) => {
     delete params.column;
     const data = await saveTask(params);
     dispatch(add_task(data));
-    dispatch(setColumnTasks({ columnId, taskId: data.id }));
+    dispatch(addTaskToColumn({ columnId, taskId: data.id }));
     showSnackbar("Task successfully added");
   } catch (e) {
     showSnackbar("Error while adding new tasks");

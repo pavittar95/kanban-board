@@ -1,5 +1,5 @@
 import { LOGOUT } from "../../actions/auth";
-import { FETCH_COLUMN, ADD_COLUMN } from "../../actions/column";
+import { FETCH_COLUMN, ADD_COLUMN, UPDATE_COLUMN } from "../../actions/column";
 const initialState = {};
 const columns = (state = initialState, action) => {
   switch (action.type) {
@@ -9,6 +9,8 @@ const columns = (state = initialState, action) => {
       return { ...action.data };
 
     case ADD_COLUMN:
+      return { ...state, [action.data.id]: action.data };
+    case UPDATE_COLUMN:
       return { ...state, [action.data.id]: action.data };
     default:
       return { ...state };

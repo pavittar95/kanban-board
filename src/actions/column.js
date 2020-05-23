@@ -74,15 +74,24 @@ export const UPDATE_COLUMN = "UPDATE_COLUMN";
 export const update_column = (data) => ({ type: UPDATE_COLUMN, data });
 export const setColumnTasks = (params) => (dispatch, state) => {
   try {
-    const columns = state().columns;
-    const newColumn = { ...columns[params.columnId] };
-    if (newColumn.taskIds) {
-      newColumn.taskIds.push(params.taskId);
-    } else {
-      newColumn.taskIds = [params.taskId];
+    const id = params.id;
+    delete params.id;
+    dispatch(update_column({ id, ...params }));
+    updateColumn(id, params);
+  } catch (error) {
+    showSnackbar("Error while updating column");
+  }
+};
+
+export const addTaskToColumn = ({ columnId, taskId }) => (dispatch, state) => {
+  try {
+    const column = state().columns[columnId];
+    if (!column.taskIds) {
+      column.taskIds = [];
     }
-    const data = updateColumn(params.columnId, newColumn);
-    dispatch(update_column({ id: params.columnId, data: newColumn }));
+    column.taskIds.push(taskId);
+    dispatch(update_column({ id: columnId, ...column }));
+    updateColumn(columnId, column);
   } catch (error) {
     showSnackbar("Error while updating column");
   }
@@ -135,11 +144,21 @@ export const update_column_order_action = (data) => ({
   type: ADD_COLUMN_ORDER,
   data,
 });
+
+export const updateColumnOrder = (params) => async (dispatch, state) => {
+  try {
+    dispatch(set_column_order_action(params));
+    await saveColumnOrder(params);
+    showSnackbar("Column Order Updated");
+  } catch (e) {
+    showSnackbar("Error while updating column order");
+  }
+};
+
 export const setColumnOrder = (params) => async (dispatch, state) => {
   try {
     let newOrder = [...state().columnOrder, params.id];
     const data = await saveColumnOrder(newOrder);
-    console.log("setColumnOrder--------------", newOrder);
     dispatch(set_column_order_action(newOrder));
     showSnackbar("Task successfully added");
   } catch (e) {

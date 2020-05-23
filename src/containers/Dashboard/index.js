@@ -1,9 +1,13 @@
 import React, { Fragment, useState, useCallback, useEffect } from "react";
-import { Grid, Button } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+} from "@material-ui/core";
+import { useDispatch } from "react-redux";
 import AddTask from "../../components/modal/addTask";
 import AddColumn from "../../components/modal/addColumn";
 import { fetchTaskAction } from "../../actions/task";
-import { useDispatch, useSelector } from "react-redux";
+import TaskBoard from './TaskBoard';
 import {
   fetchColumnAction,
   fetchColumnOrderAction,
@@ -25,7 +29,6 @@ export default function Dashboard() {
     getTasks();
   }, [getTasks]);
 
-
   return (
     <Fragment>
       <Grid container justify="flex-end">
@@ -46,9 +49,7 @@ export default function Dashboard() {
           Add Column
         </Button>
       </Grid>
-      <div>
-
-      </div>
+      <TaskBoard />
       <AddTask open={taskModal} handleClose={() => setTaskModal(false)} />
       <AddColumn open={columnModal} handleClose={() => setColumnModal(false)} />
     </Fragment>
