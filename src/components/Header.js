@@ -17,7 +17,7 @@ export default function Header() {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
-          News
+          KanBan
         </Typography>
         <Button color="inherit" onClick={signout}>
           Logout

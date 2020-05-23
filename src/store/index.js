@@ -4,12 +4,11 @@ import { routerMiddleware } from "connected-react-router";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 import rootReducer from "../reducers";
-import { firebaseMiddleware } from "../firebase";
 
 export default (history) => {
   const store = createStore(
     rootReducer(history),
-    applyMiddleware(logger, thunk, routerMiddleware(history), firebaseMiddleware)
+    applyMiddleware(logger, thunk, routerMiddleware(history))
   );
   const persistor = persistStore(store);
   return { store, persistor };

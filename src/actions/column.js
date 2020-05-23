@@ -136,18 +136,9 @@ const saveColumnOrder = (params) => {
   });
 };
 
-export const set_column_order_action = (data) => ({
-  type: ADD_COLUMN_ORDER,
-  data,
-});
-export const update_column_order_action = (data) => ({
-  type: ADD_COLUMN_ORDER,
-  data,
-});
-
 export const updateColumnOrder = (params) => async (dispatch, state) => {
   try {
-    dispatch(set_column_order_action(params));
+    dispatch(fetch_column_order(params));
     await saveColumnOrder(params);
     showSnackbar("Column Order Updated");
   } catch (e) {
@@ -159,7 +150,7 @@ export const setColumnOrder = (params) => async (dispatch, state) => {
   try {
     let newOrder = [...state().columnOrder, params.id];
     const data = await saveColumnOrder(newOrder);
-    dispatch(set_column_order_action(newOrder));
+    dispatch(fetch_column_order(newOrder));
     showSnackbar("Task successfully added");
   } catch (e) {
     showSnackbar("Error while adding new tasks");
