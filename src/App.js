@@ -23,7 +23,7 @@ function App() {
           <ThemeProvider theme={theme}>
             <SnackbarUI />
             <CssBaseline />
-            <Routes />
+            <Routes {...store} />
           </ThemeProvider>
         </ConnectedRouter>
       </PersistGate>
