@@ -10,6 +10,7 @@ import { ConnectedRouter } from "connected-react-router";
 import createStore from "./store";
 import Routes from "./routes";
 import theme from "./styles/theme";
+import SnackbarUI from "./components/ui/snackbar";
 const history = createBrowserHistory();
 
 const { store, persistor } = createStore(history);
@@ -20,6 +21,7 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <ConnectedRouter history={history}>
           <ThemeProvider theme={theme}>
+            <SnackbarUI />
             <CssBaseline />
             <Routes />
           </ThemeProvider>

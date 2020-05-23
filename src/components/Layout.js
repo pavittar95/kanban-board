@@ -1,9 +1,10 @@
-import React from 'react'
-
-export default function Layout() {
+import React, {Fragment} from 'react'
+import Header from './Header';
+export default function Layout({ children }) {
     return (
-        <div>
-            
-        </div>
+        <Fragment>
+            <Header/>
+            {children}
+        </Fragment>
     )
 }

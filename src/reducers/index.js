@@ -6,6 +6,7 @@ import auth from "./modules/auth";
 import columnOrder from "./modules/columnOrder";
 import columns from "./modules/columns";
 import tasks from "./modules/tasks";
+import snackbar from "./modules/snackbar";
 
 const PersistConfig = {
   key: "admin-app",
@@ -20,4 +21,5 @@ export default (history) =>
     columnOrder,
     columns,
     tasks,
+    snackbar
   });

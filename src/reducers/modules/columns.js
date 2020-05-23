@@ -1,15 +1,17 @@
 import { LOGOUT } from "../../actions/auth";
-
-const initialState = {
-  islogin: false,
-};
+import { FETCH_COLUMN, ADD_COLUMN } from "../../actions/column";
+const initialState = {};
 const columns = (state = initialState, action) => {
   switch (action.type) {
     case LOGOUT:
-      state.islogin = false;
       return { ...initialState };
+    case FETCH_COLUMN:
+      return { ...action.data };
+
+    case ADD_COLUMN:
+      return { ...state, [action.data.id]: action.data };
     default:
-      return state;
+      return { ...state };
   }
 };
 

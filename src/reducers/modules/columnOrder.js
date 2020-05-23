@@ -1,15 +1,15 @@
 import { LOGOUT } from "../../actions/auth";
+import { ADD_COLUMN_ORDER } from "../../actions/column";
 
-const initialState = {
-  islogin: false,
-};
+const initialState = [];
 const columnOrder = (state = initialState, action) => {
   switch (action.type) {
     case LOGOUT:
-      state.islogin = false;
-      return { ...initialState };
+      return [ ...initialState ];
+    case ADD_COLUMN_ORDER:
+      return [ ...action.data ];
     default:
-      return state;
+      return [...state];
   }
 };
 

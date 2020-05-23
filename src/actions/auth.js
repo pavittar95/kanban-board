@@ -1,9 +1,7 @@
-import { signInWithGoogle } from "../firebase";
+import { signInWithGoogle, auth } from "../firebase";
 
 export const LOGIN = "LOGIN";
 export const userlogin = (data) => ({ type: LOGIN, data });
-
-export const LOGOUT = "LOGOUT";
 
 export const login = () => (dispatch, state) => {
   signInWithGoogle()
@@ -32,4 +30,11 @@ export const login = () => (dispatch, state) => {
       // ...
       console.log("error----------", error);
     });
+};
+
+export const LOGOUT = "LOGOUT";
+
+export const logout = () => (dispatch) => {
+  auth.signOut();
+  dispatch({ type: LOGOUT });
 };
