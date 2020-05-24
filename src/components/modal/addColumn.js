@@ -9,11 +9,16 @@ import {
 } from "@material-ui/core";
 import { addColumnAction } from "../../actions/column";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function AddColumn({ open, handleClose }) {
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
   const submit = useCallback(() => {
+    if(!title.trim().length){
+      toast.error("Please Enter Title");
+      return;
+    }
     dispatch(
       addColumnAction({
         title: title,

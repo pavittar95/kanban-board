@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { addTaskAction } from "../../actions/task";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function AddTask({ open, handleClose }) {
   const [title, setTitle] = useState("");
@@ -30,6 +31,18 @@ export default function AddTask({ open, handleClose }) {
   }, [handleClose]);
 
   const submit = useCallback(() => {
+    if(!title.trim().length){
+      toast.error("Please Enter Title");
+      return;
+    }
+    if(!description.trim().length){
+      toast.error("Please Enter Description");
+      return;
+    }
+    if(!column.trim().length){
+      toast.error("Please Select Column");
+      return;
+    }
     dispatch(
       addTaskAction({
         title: title,

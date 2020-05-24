@@ -2,11 +2,14 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Paper, Grid, Button, Typography } from "@material-ui/core";
 import { login } from "../../actions/auth";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
+  const history  = useHistory();
   const dispatch = useDispatch();
   const signInWithGoogle = useCallback(() => {
     dispatch(login());
+    history.push('/');
   }, [dispatch]);
 
   return (

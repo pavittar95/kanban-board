@@ -2,7 +2,8 @@ import React from "react";
 import "@atlaskit/css-reset";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { createBrowserHistory } from "history";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -23,6 +24,7 @@ function App() {
           <ThemeProvider theme={theme}>
             <SnackbarUI />
             <CssBaseline />
+            <ToastContainer />
             <Routes {...store} />
           </ThemeProvider>
         </ConnectedRouter>
